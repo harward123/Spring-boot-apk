@@ -1,6 +1,6 @@
 package com.edwardpinzon.aplicacion.entity;
 
-import java.io.Serializable;
+  import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,13 +18,9 @@ import javax.persistence.criteria.Fetch;
 
 import org.hibernate.annotations.GenericGenerator;
 
+   @Entity
 
-
-
-
-@Entity
-
-public class User implements  Serializable{
+    public class User implements  Serializable{
 
 	/**
 	 * 
