@@ -14,9 +14,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
-import javax.persistence.criteria.Fetch;
-
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
+
+
+import com.sun.istack.NotNull;
+
 
    @Entity
 
@@ -32,16 +36,28 @@ import org.hibernate.annotations.GenericGenerator;
 	private long id;
 	
 	@Column
+    @NotBlank
+	@Size(min=5,max=8,message="No se cumple las reglas del tamano")
 	private String firstName;
+	
 	@Column
-	private String LastName;
+	@NotBlank
+	private String lastName;
+	
 	@Column
+	@NotBlank
 	private String email;
+	
 	@Column
+	@NotBlank
 	private String username;
+	
 	@Column
-	private String Password;
+	@NotBlank
+	private String password;
+	
 	@Transient
+	@NotNull
 	private String confirmPassword;
 	
 	
@@ -87,12 +103,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 
 
 	public void setLastName(String lastName) {
-		LastName = lastName;
+		this.lastName = lastName;
 	}
 	
 	
@@ -121,12 +137,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 
 
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 
 
@@ -151,14 +167,14 @@ import org.hibernate.annotations.GenericGenerator;
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", LastName=" + LastName + ", email=" + email
-				+ ", username=" + username + ", Password=" + Password + ", confirmPassword=" + confirmPassword
+		return "User [id=" + id + ", firstName=" + firstName + ", LastName=" + lastName + ", email=" + email
+				+ ", username=" + username + ", Password=" + password + ", confirmPassword=" + confirmPassword
 				+ ", roles=" + roles + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(LastName, Password, confirmPassword, email, firstName, id, roles, username);
+		return Objects.hash(lastName, password, confirmPassword, email, firstName, id, roles, username);
 	}
 
 	@Override
@@ -170,7 +186,7 @@ import org.hibernate.annotations.GenericGenerator;
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(LastName, other.LastName) && Objects.equals(Password, other.Password)
+		return Objects.equals(lastName, other.lastName) && Objects.equals(password, other.password)
 				&& Objects.equals(confirmPassword, other.confirmPassword) && Objects.equals(email, other.email)
 				&& Objects.equals(firstName, other.firstName) && id == other.id && Objects.equals(roles, other.roles)
 				&& Objects.equals(username, other.username);
