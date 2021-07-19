@@ -57,7 +57,7 @@ import com.sun.istack.NotNull;
 	private String password;
 	
 	@Transient
-	@NotNull
+	
 	private String confirmPassword;
 	
 	
