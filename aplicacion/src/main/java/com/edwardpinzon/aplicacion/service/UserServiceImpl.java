@@ -5,9 +5,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.edwardpinzon.aplicacion.Exception.UserNameOrldNotFound;
 import com.edwardpinzon.aplicacion.dto.ChangePasswordForm;
 import com.edwardpinzon.aplicacion.entity.User;
 import com.edwardpinzon.aplicacion.repository.UserRepository;
@@ -54,9 +56,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUserById(long id) throws Exception {
+	public User getUserById(long id) throws UserNameOrldNotFound {
 
-		return repository.findById(id).orElseThrow(() -> new Exception("El susuario  no existe."));
+		return repository.findById(id).orElseThrow(() -> new UserNameOrldNotFound("El id de usuario  no existe."));
 	}
 
 	@Override
@@ -83,7 +85,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteUser(Long id) throws Exception {
+	public void deleteUser(Long id) throws UserNameOrldNotFound {
 
 		User user = getUserById(id);
 		repository.delete(user);
